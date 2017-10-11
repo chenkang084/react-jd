@@ -1,39 +1,13 @@
-import React from 'react';
-import dva, { connect } from 'dva';
-import './style.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Button } from "antd-mobile";
+import "antd-mobile/dist/antd-mobile.css";
+import { TabBarExample } from "./test";
+import "./style.css";
 
-import { DatePicker } from 'antd';
-
-
-// 1. Initialize
-const app = dva();
-
-// 2. Model
-app.model({
-  namespace: 'count',
-  state: 0,
-  reducers: {
-    add  (count) { return count + 1 },
-    minus(count) { return count - 1 },
-  },
-});
-
-// 3. View
-const App = connect(({ count }) => ({
-  count
-}))(function(props) {
-  return (
-    <div>
-      <h2>{ props.count }</h2>
-      <button key="add" onClick={() => { props.dispatch({type: 'count/add'})}}>+</button>
-      <button key="minus" onClick={() => { props.dispatch({type: 'count/minus'})}}>-</button>
-      <DatePicker />
-    </div>
-  );
-});
-
-// 4. Router
-app.router(() => <App />);
-
-// 5. Start
-app.start('#root');
+ReactDOM.render(
+  <div>
+    <TabBarExample />
+  </div>,
+  document.getElementById("root")
+);

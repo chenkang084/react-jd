@@ -35,7 +35,7 @@ module.exports = {
               [
                 "import",
                 {
-                  libraryName: "antd",
+                  libraryName: "antd-mobile",
                   style: true // or 'css'
                 }
               ]
@@ -53,8 +53,8 @@ module.exports = {
     inline: true,
     hot: true,
     port: 8000,
-    contentBase: rootPath + "/src/public", // static files path
-    // publicPath: "/assets/"  //set bundle.js path
+    contentBase: rootPath + "/src/public" // static files path
+    // publicPath: "/assets/"  //set the path of bundle.js
     // host:'192.168.199.237'
   }
 };
