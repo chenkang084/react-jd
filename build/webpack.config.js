@@ -1,7 +1,7 @@
-var webpack = require("webpack");
-var path = require("path");
-var HtmlWebpackPlugin = require("html-webpack-plugin");
-const rootPath = path.resolve(__dirname, "../");
+const webpack = require("webpack"),
+  path = require("path"),
+  HtmlWebpackPlugin = require("html-webpack-plugin"),
+  rootPath = path.resolve(__dirname, "../");
 
 module.exports = {
   plugins: [
@@ -16,7 +16,7 @@ module.exports = {
     main: path.resolve(rootPath, "./src/index.js")
   },
   output: {
-    path: path.resolve(rootPath, "./dist"),
+    path: path.resolve(rootPath, "/dist"),
     filename: "bundle.js"
   },
   module: {
@@ -30,20 +30,31 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["react"]
+            presets: ["react"],
+            plugins: [
+              [
+                "import",
+                {
+                  libraryName: "antd",
+                  style: true // or 'css'
+                }
+              ]
+            ]
           }
         }
       }
     ]
   },
   resolve: {
-    extensions: [".js", ".json", ".scss", ".less", "jsonp"]
+    extensions: [".js", ".json", ".scss", ".less", "jsonp"],
+    alias: { moment$: "moment/moment.js" }
   },
   devServer: {
     inline: true,
     hot: true,
     port: 8000,
-    contentBase: rootPath + "./src"
+    contentBase: rootPath + "/src/public", // static files path
+    // publicPath: "/assets/"  //set bundle.js path
     // host:'192.168.199.237'
   }
 };

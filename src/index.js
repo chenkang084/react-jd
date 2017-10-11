@@ -2,6 +2,9 @@ import React from 'react';
 import dva, { connect } from 'dva';
 import './style.css';
 
+import { DatePicker } from 'antd';
+
+
 // 1. Initialize
 const app = dva();
 
@@ -24,6 +27,7 @@ const App = connect(({ count }) => ({
       <h2>{ props.count }</h2>
       <button key="add" onClick={() => { props.dispatch({type: 'count/add'})}}>+</button>
       <button key="minus" onClick={() => { props.dispatch({type: 'count/minus'})}}>-</button>
+      <DatePicker />
     </div>
   );
 });
