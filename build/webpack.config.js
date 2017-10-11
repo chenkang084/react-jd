@@ -1,6 +1,7 @@
 var webpack = require("webpack");
 var path = require("path");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
+const rootPath = path.resolve(__dirname, "../");
 
 module.exports = {
   plugins: [
@@ -8,14 +9,14 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       filename: "./index.html",
-      template: __dirname + "/src/index.html"
+      template: rootPath + "/src/index.html"
     })
   ],
   entry: {
-    main: path.resolve(__dirname, "./src/index.js")
+    main: path.resolve(rootPath, "./src/index.js")
   },
   output: {
-    path: path.resolve(__dirname, "./dist"),
+    path: path.resolve(rootPath, "./dist"),
     filename: "bundle.js"
   },
   module: {
@@ -29,7 +30,7 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["es2015", "react"]
+            presets: ["react"]
           }
         }
       }
@@ -42,7 +43,7 @@ module.exports = {
     inline: true,
     hot: true,
     port: 8000,
-    contentBase: "./src"
+    contentBase: rootPath + "./src"
     // host:'192.168.199.237'
   }
 };
