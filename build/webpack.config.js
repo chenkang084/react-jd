@@ -36,7 +36,8 @@ module.exports = {
                 "import",
                 {
                   libraryName: "antd-mobile",
-                  style: true // or 'css'
+                  style: "css" // or 'css'
+                  // style: true // or 'css'
                 }
               ]
             ]
@@ -46,13 +47,14 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [".js", ".json", ".scss", ".less", "jsonp"],
+    extensions: [".web.js", ".js", ".json", ".scss", ".less", "jsonp"],
+    modules: ["src", "node_modules", path.resolve(rootPath, "./node_modules")],
     alias: { moment$: "moment/moment.js" }
   },
   devServer: {
     inline: true,
     hot: true,
-    port: 8000,
+    port: 9000,
     contentBase: rootPath + "/src/public" // static files path
     // publicPath: "/assets/"  //set the path of bundle.js
     // host:'192.168.199.237'

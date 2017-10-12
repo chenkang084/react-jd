@@ -3,11 +3,12 @@ import ReactDOM from "react-dom";
 import { List, Badge } from "antd-mobile";
 import { TabBar, Icon } from "antd-mobile";
 
+
 export class TabBarExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: "redTab",
+      selectedTab: "red",
       hidden: false
     };
   }
@@ -84,24 +85,9 @@ export class TabBarExample extends React.Component {
           }}
           data-seed="logId"
         >
-          {this.renderContent("生活")}
+          生活
         </TabBar.Item>
-        <TabBar.Item
-          icon={<Icon type="koubei-o" size="md" />}
-          selectedIcon={<Icon type="koubei" size="md" />}
-          title="口碑"
-          key="口碑"
-          badge={"new"}
-          selected={this.state.selectedTab === "redTab"}
-          onPress={() => {
-            this.setState({
-              selectedTab: "redTab"
-            });
-          }}
-          data-seed="logId1"
-        >
-          {this.renderContent("口碑")}
-        </TabBar.Item>
+
         <TabBar.Item
           icon={
             <div
