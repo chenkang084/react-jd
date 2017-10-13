@@ -36,8 +36,8 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: ["babel-loader"]
-        // exclude: [path.resolve(__dirname, "./src/library/*")]
+        use: ["babel-loader"],
+        exclude: [path.resolve(__dirname, "./node_modules/*")]
         // include: [
         //   path.resolve(__dirname, "./src"),
         //   path.resolve(__dirname, "./node_modules/webpack-dev-server"),

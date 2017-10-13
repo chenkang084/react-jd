@@ -1,10 +1,12 @@
 "use strict";
 
-var ExtractTextPlugin = require("extract-text-webpack-plugin"); //css单独打包
-var HtmlWebpackPlugin = require("html-webpack-plugin"); //生成html
-var webpack = require("webpack");
-
-const path = require("path");
+const ExtractTextPlugin = require("extract-text-webpack-plugin"),
+  HtmlWebpackPlugin = require("html-webpack-plugin"),
+  webpack = require("webpack"),
+  _ = require("lodash"),
+  env = _.trim(process.env.NODE_ENV),
+  CleanWebpackPlugin = require("clean-webpack-plugin"),
+  path = require("path");
 
 const svgDirs = [
   require.resolve("antd-mobile").replace(/warn\.js$/, ""), // 1. 属于 antd-mobile 内置 svg 文件
@@ -29,17 +31,9 @@ module.exports = {
       {
         test: /\.js$/,
         use: ["babel-loader"],
-        exclude: /node_modules\/(?!(webpack-dev-server)\/).*/
-        // exclude: /node_modules\/(?!(webpack-dev-server)\/).*/
-        // exclude: [
-        // //   path.resolve(__dirname, "./src/library/*"),
-        // //   path.resolve(__dirname, "./node_modules/")
-        // ],
-        // include: [
-        //   path.resolve(__dirname, "./src"),
-        //   path.resolve(__dirname, "./node_modules/webpack-dev-server")
-        //   //   path.resolve(__dirname, "./node_modules/webpackr")
-        // ]
+        exclude: [path.resolve(__dirname, "./node_modules/")]
+        // exclude:
+        //   env === "dev" ? / / : /node_modules\/(?!(webpack-dev-server)\/).*/
       },
       {
         test: /\.(png|jpg)$/,
