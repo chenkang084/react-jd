@@ -20,9 +20,9 @@ module.exports = {
   },
   output: {
     path: __dirname + "/build", //打包后的文件存放的地方
-    filename: "[name].[chunkhash:8].bundle.js", //打包后输出文件的文件名
+    filename: "[name].[chunkhash:8].bundle.js" //打包后输出文件的文件名
     // publicPath:__dirname+'/public',
-    chunkFilename: "[name]-[id].[chunkhash:8].bundle.js"
+    // chunkFilename: "[name]-[id].[chunkhash:8].bundle.js"
   },
   module: {
     rules: [
@@ -32,7 +32,8 @@ module.exports = {
         exclude: /(node_modules|bower_components)/
         // include: [
         //   path.resolve(__dirname, "./src"),
-        //   path.resolve(__dirname, "./node_modules")
+        //   path.resolve(__dirname, "./node_modules/webpack-dev-server"),
+        //   path.resolve(__dirname, "./node_modules/webpackr")
         // ]
       },
       {
@@ -61,7 +62,7 @@ module.exports = {
     ]
   },
   devServer: {
-    contentBase: "./", //本地服务器所加载的页面所在的目录
+    contentBase: "./src/", //本地服务器所加载的页面所在的目录
     host: "0.0.0.0",
     port: 9000,
     historyApiFallback: true, //不跳转
@@ -96,6 +97,11 @@ module.exports = {
       filename: "./index.html", //生成的html存放路径，相对于 path
       template: "./src/index.html", //html模板路径
       hash: true //为静态资源生成hash值
+    }),
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      name: "vendor",
+      manifest: require("./src/library/vendor-manifest.json")
     })
   ],
   resolve: {
