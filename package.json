@@ -47,8 +47,9 @@
     "redux-thunk": "^2.1.0"
   },
   "scripts": {
-    "start": "webpack-dev-server",
-    "dll": "webpack --colors --profile --display-modules --config webpack.dll.config.js ",
-    "build": "webpack --progress --profile --colors --config webpack.pro.config.js"
+    "start": "webpack-dev-server --progress --color",
+    "dll":
+      "webpack --colors --profile --display-modules --config webpack.dll.config.js ",
+    "build": "webpack --progress --profile --colors --config webpack.config.js"
   }
 }

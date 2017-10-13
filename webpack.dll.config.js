@@ -13,7 +13,7 @@ const svgDirs = [
 
 module.exports = {
   entry: {
-    vendor: ["antd-mobile", "es6-promise", "react", "react-dom"]
+    vendor: ["react","react-dom","antd-mobile"]
   },
   output: {
     path: __dirname + "/src/library", //打包后的文件存放的地方
@@ -21,22 +21,57 @@ module.exports = {
     library: "vendor"
   },
   module: {
+    // rules: [
+    //   {
+    //     test: /\.js$/,
+    //     use: ["babel-loader"],
+    //     // exclude: /(node_modules|bower_components)/
+    //     // include: [
+    //     //   path.resolve(__dirname, "./src"),
+    //     //   path.resolve(__dirname, "./node_modules/webpack-dev-server"),
+    //     //   path.resolve(__dirname, "./node_modules/webpackr")
+    //     // ]
+    //   }
+    // ]
     rules: [
       {
         test: /\.js$/,
-        use: ["babel-loader"],
-        exclude: /(node_modules|bower_components)/
+        use: ["babel-loader"]
+        // exclude: [path.resolve(__dirname, "./src/library/*")]
         // include: [
         //   path.resolve(__dirname, "./src"),
         //   path.resolve(__dirname, "./node_modules/webpack-dev-server"),
         //   path.resolve(__dirname, "./node_modules/webpackr")
         // ]
+      },
+      {
+        test: /\.(png|jpg)$/,
+        use: "url-loader?limit=8192&name=src/images/[name].[ext]"
+      },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: ["css-loader", "postcss-loader"]
+        })
+      },
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: ["css-loader", "postcss-loader", "sass-loader"]
+        })
+      },
+      {
+        test: /\.(svg)$/i,
+        use: "svg-sprite-loader",
+        include: svgDirs // 把 svgDirs 路径下的所有 svg 文件交给 svg-sprite-loader 插件处理
       }
     ]
   },
 
   plugins: [
-    // new webpack.optimize.ModuleConcatenationPlugin(),
+    new ExtractTextPlugin("main.css"),
     new CleanWebpackPlugin(["./src/library/*"]),
     new webpack.DllPlugin({
       path: path.resolve(__dirname, "./src/library/[name]-manifest.json"),

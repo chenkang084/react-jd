@@ -29,11 +29,16 @@ module.exports = {
       {
         test: /\.js$/,
         use: ["babel-loader"],
-        exclude: /(node_modules|bower_components)/
+        exclude: /node_modules\/(?!(webpack-dev-server)\/).*/
+        // exclude: /node_modules\/(?!(webpack-dev-server)\/).*/
+        // exclude: [
+        // //   path.resolve(__dirname, "./src/library/*"),
+        // //   path.resolve(__dirname, "./node_modules/")
+        // ],
         // include: [
         //   path.resolve(__dirname, "./src"),
-        //   path.resolve(__dirname, "./node_modules/webpack-dev-server"),
-        //   path.resolve(__dirname, "./node_modules/webpackr")
+        //   path.resolve(__dirname, "./node_modules/webpack-dev-server")
+        //   //   path.resolve(__dirname, "./node_modules/webpackr")
         // ]
       },
       {
