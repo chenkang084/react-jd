@@ -77,7 +77,7 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin("main.css"),
-    new webpack.optimize.ModuleConcatenationPlugin(),
+    // new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.LoaderOptionsPlugin({
       options: {
         postcss: function() {
