@@ -17,7 +17,7 @@ module.exports = {
     vendor: ["react", "react-dom", "antd-mobile"]
   },
   output: {
-    path: rootPath + "/src/library", //打包后的文件存放的地方
+    path: rootPath + "/src/public/library", //打包后的文件存放的地方
     filename: "vendor.dll.js", //打包后输出文件的文件名
     library: "vendor"
   },

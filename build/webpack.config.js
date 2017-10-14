@@ -62,7 +62,7 @@ module.exports = {
     ]
   },
   devServer: {
-    contentBase: rootPath + "/src/", //本地服务器所加载的页面所在的目录
+    contentBase: rootPath + "/src/public/", //本地服务器所加载的页面所在的目录
     host: "0.0.0.0",
     port: 9000,
     historyApiFallback: true, //不跳转
@@ -103,7 +103,7 @@ module.exports = {
       name: "vendor",
       manifest: require(path.resolve(
         rootPath,
-        "./src/library/vendor-manifest.json"
+        "./src/public/library/vendor-manifest.json"
       ))
     })
   ],

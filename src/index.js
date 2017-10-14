@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Button } from "antd-mobile";
-// import "antd-mobile/dist/antd-mobile.css";
-import { TabBarExample } from "./test";
-// import "./style.css";
+import { NavTabs } from "./components/NavTabs/NavTabs";
+import "./styles/style.css";
+import App from "./components/App/App";
 
 ReactDOM.render(
   <div>
-    <TabBarExample />
+    <App />
   </div>,
   document.getElementById("root")
 );
