@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { List, Badge } from "antd-mobile";
 import { TabBar, Icon } from "antd-mobile";
 
-
 export class TabBarExample extends React.Component {
   constructor(props) {
     super(props);
@@ -85,42 +84,51 @@ export class TabBarExample extends React.Component {
           }}
           data-seed="logId"
         >
-          生活
+          {this.renderContent("生活")}
         </TabBar.Item>
-
-        <TabBar.Item
+        {/* <TabBar.Item
+          icon={<Icon type="koubei-o" size="md" />}
+          selectedIcon={<Icon type="koubei" size="md" />}
+          title="口碑"
+          key="口碑"
+          badge={'new'}
+          selected={this.state.selectedTab === 'redTab'}
+          onPress={() => {
+            this.setState({
+              selectedTab: 'redTab',
+            });
+          }}
+          data-seed="logId1"
+        >
+          {this.renderContent('口碑')}
+        </TabBar.Item> */}
+        {/* <TabBar.Item
           icon={
-            <div
-              style={{
-                width: "0.44rem",
-                height: "0.44rem",
-                background:
-                  "url(https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg) center center /  0.42rem 0.42rem no-repeat"
-              }}
+            <div style={{
+              width: '0.44rem',
+              height: '0.44rem',
+              background: 'url(https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg) center center /  0.42rem 0.42rem no-repeat' }}
             />
           }
           selectedIcon={
-            <div
-              style={{
-                width: "0.44rem",
-                height: "0.44rem",
-                background:
-                  "url(https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg) center center /  0.42rem 0.42rem no-repeat"
-              }}
+            <div style={{
+              width: '0.44rem',
+              height: '0.44rem',
+              background: 'url(https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg) center center /  0.42rem 0.42rem no-repeat' }}
             />
           }
           title="朋友"
           key="朋友"
           dot
-          selected={this.state.selectedTab === "greenTab"}
+          selected={this.state.selectedTab === 'greenTab'}
           onPress={() => {
             this.setState({
-              selectedTab: "greenTab"
+              selectedTab: 'greenTab',
             });
           }}
         >
-          {this.renderContent("朋友")}
-        </TabBar.Item>
+          {this.renderContent('朋友')}
+        </TabBar.Item> */}
         <TabBar.Item
           icon={{
             uri:

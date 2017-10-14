@@ -1,98 +1,114 @@
-const webpack = require("webpack"),
-  path = require("path"),
-  HtmlWebpackPlugin = require("html-webpack-plugin"),
-  rootPath = path.resolve(__dirname, "../"),
-  pxtorem = require("postcss-pxtorem");
+"use strict";
 
-const webpackConfig = {
-  plugins: [
-    new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-      filename: "./index.html",
-      template: rootPath + "/src/index.html"
-    })
-  ],
+const ExtractTextPlugin = require("extract-text-webpack-plugin"),
+  HtmlWebpackPlugin = require("html-webpack-plugin"),
+  webpack = require("webpack"),
+  _ = require("lodash"),
+  env = _.trim(process.env.NODE_ENV),
+  CleanWebpackPlugin = require("clean-webpack-plugin"),
+  path = require("path"),
+  rootPath = path.resolve(__dirname, "../");
+
+const svgDirs = [
+  require.resolve("antd-mobile").replace(/warn\.js$/, ""), // 1. 属于 antd-mobile 内置 svg 文件
+  path.resolve(rootPath, "/src/images") // 2. 自己私人的 svg 存放目录
+];
+
+module.exports = {
+  devtool: "module-source-map",
   entry: {
-    main: path.resolve(rootPath, "./src/index.js")
+    app: [
+      rootPath + "/src/index.js" //唯一入口文件
+    ]
   },
   output: {
-    path: path.resolve(rootPath, "/dist"),
-    filename: "bundle.js"
+    path: rootPath + "/dist", //打包后的文件存放的地方
+    filename: "[name].[chunkhash:8].bundle.js" //打包后输出文件的文件名
+    // publicPath:rootPath+'/public',
+    // chunkFilename: "[name]-[id].[chunkhash:8].bundle.js"
   },
   module: {
     rules: [
       {
-        test: /\.less/,
-        use: [
-          "style-loader",
-          "css-loader",
-          "less-loader"
-        ]
-      },
-      { test: /\.css$/, use: ["style-loader", "css-loader"] },
-      { test: /\.(png|jpg|jpeg)$/, use: ["url-loader"] },
-
-      {
-        test: /\.svg$/,
-        loader: "svg-sprite-loader",
-        include: [
-          require.resolve("antd-mobile").replace(/warn\.js$/, "") // antd-mobile 内置svg
-          //path.resolve(__dirname, 'src/my-project-svg-foler'),  // 业务代码本地私有 svg 存放目录
-        ]
-      },
-
-      {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["react"],
-            plugins: [
-              [
-                "import",
-                {
-                  libraryName: "antd-mobile",
-                  style: "css" // or 'css'
-                  // style: true // or 'css'
-                }
-              ]
-            ]
-          }
-        }
+        use: ["babel-loader"],
+        exclude: [path.resolve(rootPath, "./node_modules/")]
+        // exclude:
+        //   env === "dev" ? / / : /node_modules\/(?!(webpack-dev-server)\/).*/
+      },
+      {
+        test: /\.(png|jpg)$/,
+        use: "url-loader?limit=8192&name=src/images/[name].[ext]"
+      },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: ["css-loader", "postcss-loader"]
+        })
+      },
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: ["css-loader", "postcss-loader", "sass-loader"]
+        })
+      },
+      {
+        test: /\.(svg)$/i,
+        use: "svg-sprite-loader",
+        include: svgDirs // 把 svgDirs 路径下的所有 svg 文件交给 svg-sprite-loader 插件处理
       }
     ]
   },
-  resolve: {
-    extensions: [
-      ".web.tsx",
-      ".web.ts",
-      ".web.jsx",
-      ".web.js",
-      ".ts",
-      ".tsx",
-      ".js",
-      ".jsx",
-      ".json"
-    ],
-    // modules: ["src", "node_modules", path.resolve(rootPath, "./node_modules")],
-    alias: { moment$: "moment/moment.js" }
-  },
   devServer: {
-    inline: true,
-    hot: true,
-    port: 9000,
+    contentBase: rootPath + "/src/", //本地服务器所加载的页面所在的目录
     host: "0.0.0.0",
-    disableHostCheck: true,
-    contentBase: rootPath + "/src/public" // static files path
-    // publicPath: "/assets/"  //set the path of bundle.js
+    port: 9000,
+    historyApiFallback: true, //不跳转
+    inline: true, //实时刷新
+    proxy: {
+      "/api": {
+        target: "https://cnodejs.org/api/v1",
+        secure: false,
+        changeOrigin: true,
+        host: "cnodejs.org"
+      }
+    }
+  },
+  plugins: [
+    new ExtractTextPlugin("main.css"),
+    // new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: function() {
+          return [
+            require("postcss-pxtorem")({
+              rootValue: 100,
+              propWhiteList: []
+            }),
+            require("autoprefixer")
+          ];
+        }
+      }
+    }),
+    new HtmlWebpackPlugin({
+      //根据模板插入css/js等生成最终HTML
+      filename: "./index.html", //生成的html存放路径，相对于 path
+      template: rootPath + "/src/index.html", //html模板路径
+      hash: true //为静态资源生成hash值
+    }),
+    new webpack.DllReferencePlugin({
+      context: rootPath,
+      name: "vendor",
+      manifest: require(path.resolve(
+        rootPath,
+        "./src/library/vendor-manifest.json"
+      ))
+    })
+  ],
+  resolve: {
+    modules: ["node_modules", path.join(rootPath, "./node_modules")],
+    extensions: [".web.js", ".js", ".json"]
   }
 };
-
-// webpackConfig.postcss.push(pxtorem({
-//   rootValue: 100,
-//   propWhiteList: [],
-// }));
-
-module.exports = webpackConfig;

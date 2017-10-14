@@ -31,6 +31,7 @@
     "style-loader": "^0.12.3",
     "svg-sprite-loader": "^0.3.0",
     "url-loader": "^0.5.6",
+    "webpack": "^3.7.1",
     "webpack-dev-server": "2.7.1"
   },
   "dependencies": {
@@ -49,8 +50,8 @@
     "redux-thunk": "^2.1.0"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=dev webpack-dev-server --progress --color",
-    "dll": "webpack --colors --profile --display-modules --config webpack.dll.config.js ",
+    "start": "cd build && cross-env NODE_ENV=dev webpack-dev-server --progress --color",
+    "dll": "cd build && webpack --colors --profile --display-modules --config webpack.dll.config.js ",
     "build": "webpack --progress --profile --colors --config webpack.config.js"
   }
 }
