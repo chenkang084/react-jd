@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { NavTabs } from "../NavTabs/NavTabs";
+import { connect } from "dva";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -29,10 +30,10 @@ export default class App extends React.Component {
         badge: 1,
         onPress: () => {
           this.handlePress("首页");
-        },
-        render: () => {
-          return "首页";
         }
+        // render: () => {
+        //   return "首页";
+        // }
       },
       {
         title: "口碑",
@@ -44,10 +45,10 @@ export default class App extends React.Component {
         badge: 0,
         onPress: () => {
           this.handlePress("口碑");
-        },
-        render: () => {
-          return "口碑";
         }
+        // render: () => {
+        //   return "口碑";
+        // }
       },
       {
         title: "朋友",
@@ -59,10 +60,10 @@ export default class App extends React.Component {
         badge: 1,
         onPress: () => {
           this.handlePress("朋友");
-        },
-        render: () => {
-          return "朋友";
         }
+        // render: () => {
+        //   return "朋友";
+        // }
       },
       {
         title: "我的",
@@ -74,16 +75,17 @@ export default class App extends React.Component {
         badge: 1,
         onPress: () => {
           this.handlePress("我的");
-        },
-        render: () => {
-          return "我的";
         }
+        // render: () => {
+        //   return "我的";
+        // }
       }
     ];
 
     return (
       <div>
         <NavTabs menus={menus} />
+        <div>{this.props.children}</div>
       </div>
     );
   }

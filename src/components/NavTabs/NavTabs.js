@@ -31,7 +31,7 @@ export class NavTabs extends React.Component {
                 badge={item.badge}
                 onPress={item.onPress}
               >
-                {item.render()}
+                {item.render && item.render()}
               </TabBar.Item>
             );
           })}

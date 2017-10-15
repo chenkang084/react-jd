@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "antd-mobile": "^1.6.11",
+    "dva": "^1.2.0",
     "es6-promise": "^4.1.0",
     "flex.css": "^1.1.6",
     "isomorphic-fetch": "^2.2.1",
