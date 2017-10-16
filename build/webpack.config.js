@@ -46,8 +46,7 @@ module.exports = {
           fallback: "style-loader",
           use: [
             {
-              loader: "css-loader",
-              query: { modules: false, sourceMaps: true, importLoaders: 2 }
+              loader: "css-loader"
             },
             "postcss-loader"
           ]
@@ -59,31 +58,30 @@ module.exports = {
           fallback: "style-loader",
           use: [
             {
-              loader: "css-loader?modules&sourceMap&importLoaders=1&localIdentName=[hash:base64:5]!postcss-loader"
+              loader:
+                "css-loader?modules&sourceMap&importLoaders=1&localIdentName=[hash:base64:5]!postcss-loader"
             },
-            "postcss-loader",
             "sass-loader"
           ]
         })
       },
       {
         test: /\.less$/,
-        use: ExtractTextPlugin.extract({
-          fallbackLoader: "style-loader",
-          loader:
-            "css-loader?modules&sourceMap&importLoaders=1&localIdentName=[hash:base64:5]!postcss-loader"
-        })
         // use: ExtractTextPlugin.extract({
-        //   fallback: "style-loader",
-        //   use: [
-        //     {
-        //       loader: "css-loader",
-        //       query: { modules: false, sourceMaps: true, importLoaders: 2 }
-        //     },
-        //     "postcss-loader",
-        //     "less-loader"
-        //   ]
+        //   fallbackLoader: "style-loader",
+        //   loader:
+        //     "css-loader?modules&sourceMap&importLoaders=1&localIdentName=[hash:base64:5]!postcss-loader"
         // })
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: [
+            {
+              loader:
+                "css-loader?modules&sourceMap&importLoaders=1&localIdentName=[hash:base64:5]!postcss-loader"
+            },
+            "less-loader"
+          ]
+        })
       },
       {
         test: /\.(svg)$/i,
