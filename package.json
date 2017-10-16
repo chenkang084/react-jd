@@ -53,6 +53,6 @@
   "scripts": {
     "start": "cd build && cross-env NODE_ENV=dev webpack-dev-server --progress --color",
     "dll": "cd build && webpack --colors --profile --display-modules --config webpack.dll.config.js ",
-    "build": "webpack --progress --profile --colors --config webpack.config.js"
+    "build": "cd build && webpack --progress --profile --colors --config webpack.config.js"
   }
 }
