@@ -21,8 +21,27 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.less/, use: ["style-loader", "css-loader", "less-loader"] },
-      { test: /\.css$/, use: ["style-loader", "css-loader"] },
+      {
+        test: /\.less/,
+        use: [
+          "style-loader",
+          {
+            loader:
+              "css-loader?modules&sourceMap&importLoaders=1&localIdentName=[hash:base64:5]"
+          },
+          "less-loader"
+        ]
+      },
+      {
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader:
+              "css-loader?modules&sourceMap&importLoaders=1&localIdentName=[hash:base64:5]"
+          }
+        ]
+      },
       { test: /\.(png|jpg|jpeg)$/, use: ["url-loader"] },
       {
         test: /\.js$/,
@@ -53,7 +72,8 @@ module.exports = {
     inline: true,
     hot: true,
     port: 8000,
-    contentBase: rootPath + "/src/public", // static files path
+    host: "0.0.0.0",
+    contentBase: rootPath + "/src/public" // static files path
     // publicPath: "/assets/"  //set bundle.js path
     // host:'192.168.199.237'
   }
