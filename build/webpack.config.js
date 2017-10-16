@@ -55,6 +55,20 @@ module.exports = {
         })
       },
       {
+        test: /\.less$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: [
+            {
+              loader: "css-loader",
+              query: { modules: true, sourceMaps: true }
+            },
+            "postcss-loader",
+            "less-loader"
+          ]
+        })
+      },
+      {
         test: /\.(svg)$/i,
         use: "svg-sprite-loader",
         include: svgDirs // 把 svgDirs 路径下的所有 svg 文件交给 svg-sprite-loader 插件处理
@@ -112,6 +126,6 @@ module.exports = {
   ],
   resolve: {
     modules: ["node_modules", path.join(rootPath, "./node_modules")],
-    extensions: [".web.js", ".js", ".json"]
+    extensions: [".web.js", ".js", ".json", ".scss", ".css", ".less"]
   }
 };

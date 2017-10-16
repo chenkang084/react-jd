@@ -34,7 +34,7 @@ function RouterConfig({ history, app }) {
         getComponent(nextState, cb) {
           Promise.all([
             System.import("../models/app2.model"),
-            System.import("../components/test")
+            System.import("../routers/home/Home.router.js")
             // .then(loadRoute(cb))
             // .catch(errorLoading)
           ]).then(data => {
@@ -45,21 +45,6 @@ function RouterConfig({ history, app }) {
           });
         }
       },
-      // getIndexRoute(nextState, cb) {
-      //   System.import("../components/test")
-      //     .then(loadRoute(cb))
-      //     .catch(errorLoading);
-      // },
-      // IndexRoute: Test,
-      // getIndexRoute(nextState, cb) {
-      //   require.ensure(
-      //     [],
-      //     require => {
-      //       cb(null, {component: require("../components/test")});
-      //     },
-      //     "dashboard"
-      //   );
-      // },
       childRoutes: [
         {
           path: "/test",
@@ -82,14 +67,7 @@ function RouterConfig({ history, app }) {
     }
   ];
 
-  return (
-    <Router history={history} routes={routes}>
-      {/* <Route path="/" component={App}>
-        <IndexRoute component={Test} />
-        <Route path="test" component={Test} />
-      </Route> */}
-    </Router>
-  );
+  return <Router history={history} routes={routes} />;
 }
 
 export default RouterConfig;
