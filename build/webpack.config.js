@@ -44,29 +44,46 @@ module.exports = {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
-          use: ["css-loader", "postcss-loader"]
+          use: [
+            {
+              loader: "css-loader",
+              query: { modules: false, sourceMaps: true, importLoaders: 2 }
+            },
+            "postcss-loader"
+          ]
         })
       },
       {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
-          use: ["css-loader", "postcss-loader", "sass-loader"]
+          use: [
+            {
+              loader: "css-loader?modules&sourceMap&importLoaders=1&localIdentName=[hash:base64:5]!postcss-loader"
+            },
+            "postcss-loader",
+            "sass-loader"
+          ]
         })
       },
       {
         test: /\.less$/,
         use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: [
-            {
-              loader: "css-loader",
-              query: { modules: true, sourceMaps: true }
-            },
-            "postcss-loader",
-            "less-loader"
-          ]
+          fallbackLoader: "style-loader",
+          loader:
+            "css-loader?modules&sourceMap&importLoaders=1&localIdentName=[hash:base64:5]!postcss-loader"
         })
+        // use: ExtractTextPlugin.extract({
+        //   fallback: "style-loader",
+        //   use: [
+        //     {
+        //       loader: "css-loader",
+        //       query: { modules: false, sourceMaps: true, importLoaders: 2 }
+        //     },
+        //     "postcss-loader",
+        //     "less-loader"
+        //   ]
+        // })
       },
       {
         test: /\.(svg)$/i,
@@ -91,7 +108,11 @@ module.exports = {
     }
   },
   plugins: [
-    new ExtractTextPlugin("main.css"),
+    new ExtractTextPlugin({
+      filename: "main.css",
+      disable: false,
+      allChunks: true
+    }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: "common" // Specify the common bundle's name.
