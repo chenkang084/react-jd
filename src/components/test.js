@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { TabBar, Icon } from "antd-mobile";
+import { connect } from "dva";
 
-export default class Test extends React.Component {
+class Test extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -15,3 +16,11 @@ export default class Test extends React.Component {
     );
   }
 }
+
+function mapStateToProps({ users2, users }) {
+  return {
+    model: users2
+  };
+}
+
+export default connect(mapStateToProps)(Test);

@@ -23,9 +23,9 @@ module.exports = {
   },
   output: {
     path: rootPath + "/dist", //打包后的文件存放的地方
-    filename: "[name].[chunkhash:8].bundle.js" //打包后输出文件的文件名
+    filename: "[name].[chunkhash:8].bundle.js", //打包后输出文件的文件名
     // publicPath:rootPath+'/public',
-    // chunkFilename: "[name]-[id].[chunkhash:8].bundle.js"
+    chunkFilename: "[name]-[id].[chunkhash:8].bundle.js"
   },
   module: {
     rules: [
@@ -78,7 +78,10 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin("main.css"),
-    // new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "common" // Specify the common bundle's name.
+    }),
     new webpack.LoaderOptionsPlugin({
       options: {
         postcss: function() {

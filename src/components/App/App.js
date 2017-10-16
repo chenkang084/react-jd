@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { NavTabs } from "../NavTabs/NavTabs";
 import { connect } from "dva";
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -90,3 +90,11 @@ export default class App extends React.Component {
     );
   }
 }
+
+function mapStateToProps({ users }) {
+  return {
+    model: users
+  };
+}
+
+export default connect(mapStateToProps)(App);
