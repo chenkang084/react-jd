@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import styles from "./Header.less";
-import { SearchBar, Button, WhiteSpace, WingBlank } from "antd-mobile";
+import classnames from "classnames";
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -12,8 +12,21 @@ export default class Header extends React.Component {
     return (
       <div>
         <div className={styles.headerContainer}>
-          <input type="text" placeholder="搜索" />
-          {/* <SearchBar placeholder="搜索" maxLength={8} /> */}
+          <div className={styles.searchBox}>
+            <div className={styles.searchIcon}>
+              <span>
+                <i className={classnames(styles.spriteIconCancel)} />
+              </span>
+            </div>
+            <form>
+              <div className={styles.searchInputBox}>
+                <input placeholder="搜索" maxLength="20" />
+                <a className={styles.searchSubmitBtn} href="#">
+                  <i className={classnames(styles.spriteIconSearch)} />
+                </a>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     );
