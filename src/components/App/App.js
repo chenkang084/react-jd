@@ -26,13 +26,13 @@ class App extends React.Component {
           width: "0.44rem",
           height: "0.44rem",
           background:
-            "url(./assets/imgs/navs/a-home-unselect.png) center /  25px no-repeat"
+            "url(./assets/imgs/navs/a-home-unselect.png) center /  .44rem no-repeat"
         },
         selectedIcon: {
           width: "0.44rem",
           height: "0.44rem",
           background:
-            "url(./assets/imgs/navs/a-home.png) center /  25px no-repeat"
+            "url(./assets/imgs/navs/a-home.png) center /  .44rem no-repeat"
         },
         selected: this.state.selectedTab,
         // badge: 1,
@@ -49,13 +49,13 @@ class App extends React.Component {
           width: "0.44rem",
           height: "0.44rem",
           background:
-            "url(./assets/imgs/navs/a-catalog-unselect.png) center /  25px no-repeat"
+            "url(./assets/imgs/navs/a-catalog-unselect.png) center /  .44rem no-repeat"
         },
         selectedIcon: {
           width: "0.44rem",
           height: "0.44rem",
           background:
-            "url(./assets/imgs/navs/a-catalog.png) center /  25px no-repeat"
+            "url(./assets/imgs/navs/a-catalog.png) center /  .44rem no-repeat"
         },
         selected: this.state.selectedTab,
         badge: 0,
@@ -72,13 +72,13 @@ class App extends React.Component {
           width: "0.44rem",
           height: "0.44rem",
           background:
-            "url(./assets/imgs/navs/n-find-unselect.png) center /  25px no-repeat"
+            "url(./assets/imgs/navs/n-find-unselect.png) center /  .44rem no-repeat"
         },
         selectedIcon: {
           width: "0.44rem",
           height: "0.44rem",
           background:
-            "url(./assets/imgs/navs/n-find.png) center /  25px no-repeat"
+            "url(./assets/imgs/navs/n-find.png) center /  .44rem no-repeat"
         },
         selected: this.state.selectedTab,
         badge: 1,
@@ -95,13 +95,13 @@ class App extends React.Component {
           width: "0.44rem",
           height: "0.44rem",
           background:
-            "url(./assets/imgs/navs/n-cart-unselect.png) center /  25px no-repeat"
+            "url(./assets/imgs/navs/n-cart-unselect.png) center /  35px no-repeat"
         },
         selectedIcon: {
           width: "0.44rem",
           height: "0.44rem",
           background:
-            "url(./assets/imgs/navs/n-cart.png) center /  25px no-repeat"
+            "url(./assets/imgs/navs/n-cart.png) center /  35px no-repeat"
         },
         selected: this.state.selectedTab,
         badge: 1,
@@ -118,13 +118,13 @@ class App extends React.Component {
           width: "0.44rem",
           height: "0.44rem",
           background:
-            "url(./assets/imgs/navs/n-me-unselect.png) center /  25px no-repeat"
+            "url(./assets/imgs/navs/n-me-unselect.png) center /  .44rem no-repeat"
         },
         selectedIcon: {
           width: "0.44rem",
           height: "0.44rem",
           background:
-            "url(./assets/imgs/navs/n-me.png) center /  25px no-repeat"
+            "url(./assets/imgs/navs/n-me.png) center /  .44rem no-repeat"
         },
         selected: this.state.selectedTab,
         badge: 1,

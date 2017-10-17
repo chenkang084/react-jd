@@ -7,6 +7,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin"),
   env = _.trim(process.env.NODE_ENV),
   CleanWebpackPlugin = require("clean-webpack-plugin"),
   path = require("path"),
+  CopyWebpackPlugin = require("copy-webpack-plugin"),
   rootPath = path.resolve(__dirname, "../");
 
 const svgDirs = [
@@ -24,7 +25,7 @@ module.exports = {
   output: {
     path: rootPath + "/dist", //打包后的文件存放的地方
     filename: "[name].[chunkhash:8].bundle.js", //打包后输出文件的文件名
-    // publicPath:rootPath+'/public',
+    // publicPath: "./public",
     chunkFilename: "[name]-[id].[chunkhash:8].bundle.js"
   },
   module: {
@@ -67,11 +68,6 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        // use: ExtractTextPlugin.extract({
-        //   fallbackLoader: "style-loader",
-        //   loader:
-        //     "css-loader?modules&sourceMap&importLoaders=1&localIdentName=[hash:base64:5]!postcss-loader"
-        // })
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
           use: [
@@ -141,7 +137,13 @@ module.exports = {
         rootPath,
         "./src/public/library/vendor-manifest.json"
       ))
-    })
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: rootPath + "/src/public/",
+        to: rootPath + "/dist"
+      }
+    ])
   ],
   resolve: {
     modules: ["node_modules", path.join(rootPath, "./node_modules")],
