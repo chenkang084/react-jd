@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { NavTabs } from "../NavTabs/NavTabs";
+import { connect } from "dva";
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,70 +22,134 @@ export default class App extends React.Component {
     const menus = [
       {
         title: "首页",
-        icon:
-          "https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg",
-        selectedIcon:
-          "https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg",
+        icon: {
+          width: "0.44rem",
+          height: "0.44rem",
+          background:
+            "url(./assets/imgs/navs/a-home-unselect.png) center /  .44rem no-repeat"
+        },
+        selectedIcon: {
+          width: "0.44rem",
+          height: "0.44rem",
+          background:
+            "url(./assets/imgs/navs/a-home.png) center /  .44rem no-repeat"
+        },
         selected: this.state.selectedTab,
-        badge: 1,
+        // badge: 1,
         onPress: () => {
           this.handlePress("首页");
-        },
-        render: () => {
-          return "首页";
         }
+        // render: () => {
+        //   return "首页";
+        // }
       },
       {
-        title: "口碑",
-        icon:
-          "https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg",
-        selectedIcon:
-          "https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg",
+        title: "分类",
+        icon: {
+          width: "0.44rem",
+          height: "0.44rem",
+          background:
+            "url(./assets/imgs/navs/a-catalog-unselect.png) center /  .44rem no-repeat"
+        },
+        selectedIcon: {
+          width: "0.44rem",
+          height: "0.44rem",
+          background:
+            "url(./assets/imgs/navs/a-catalog.png) center /  .44rem no-repeat"
+        },
         selected: this.state.selectedTab,
         badge: 0,
         onPress: () => {
-          this.handlePress("口碑");
-        },
-        render: () => {
-          return "口碑";
+          this.handlePress("分类");
         }
+        // render: () => {
+        //   return "口碑";
+        // }
       },
       {
-        title: "朋友",
-        icon:
-          "https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg",
-        selectedIcon:
-          "https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg",
+        title: "发现",
+        icon: {
+          width: "0.44rem",
+          height: "0.44rem",
+          background:
+            "url(./assets/imgs/navs/n-find-unselect.png) center /  .44rem no-repeat"
+        },
+        selectedIcon: {
+          width: "0.44rem",
+          height: "0.44rem",
+          background:
+            "url(./assets/imgs/navs/n-find.png) center /  .44rem no-repeat"
+        },
         selected: this.state.selectedTab,
         badge: 1,
         onPress: () => {
-          this.handlePress("朋友");
-        },
-        render: () => {
-          return "朋友";
+          this.handlePress("发现");
         }
+        // render: () => {
+        //   return "朋友";
+        // }
+      },
+      {
+        title: "购物",
+        icon: {
+          width: "0.44rem",
+          height: "0.44rem",
+          background:
+            "url(./assets/imgs/navs/n-cart-unselect.png) center /  35px no-repeat"
+        },
+        selectedIcon: {
+          width: "0.44rem",
+          height: "0.44rem",
+          background:
+            "url(./assets/imgs/navs/n-cart.png) center /  35px no-repeat"
+        },
+        selected: this.state.selectedTab,
+        badge: 1,
+        onPress: () => {
+          this.handlePress("购物");
+        }
+        // render: () => {
+        //   return "我的";
+        // }
       },
       {
         title: "我的",
-        icon:
-          "https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg",
-        selectedIcon:
-          "https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg",
+        icon: {
+          width: "0.44rem",
+          height: "0.44rem",
+          background:
+            "url(./assets/imgs/navs/n-me-unselect.png) center /  .44rem no-repeat"
+        },
+        selectedIcon: {
+          width: "0.44rem",
+          height: "0.44rem",
+          background:
+            "url(./assets/imgs/navs/n-me.png) center /  .44rem no-repeat"
+        },
         selected: this.state.selectedTab,
         badge: 1,
         onPress: () => {
           this.handlePress("我的");
-        },
-        render: () => {
-          return "我的";
         }
+        // render: () => {
+        //   return "我的";
+        // }
       }
     ];
 
     return (
       <div>
         <NavTabs menus={menus} />
+        <div>{this.props.children}</div>
       </div>
     );
   }
 }
+
+function mapStateToProps({ users }) {
+  return {
+    model: users
+  };
+}
+
+export default connect(mapStateToProps)(App);

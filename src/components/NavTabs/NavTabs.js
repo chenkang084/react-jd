@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { TabBar, Icon } from "antd-mobile";
+import "./NavTabs.less";
 
 export class NavTabs extends React.Component {
   constructor(props) {
@@ -10,8 +11,8 @@ export class NavTabs extends React.Component {
   render() {
     return (
       <TabBar
-        unselectedTintColor="#949494"
-        tintColor="#33A3F4"
+        unselectedTintColor="#181818"
+        tintColor="#f13030"
         barTintColor="white"
         hidden={this.props.hidden}
       >
@@ -19,19 +20,15 @@ export class NavTabs extends React.Component {
           this.props.menus.map((item, index) => {
             return (
               <TabBar.Item
-                icon={{
-                  uri: item.icon
-                }}
-                selectedIcon={{
-                  uri: item.selectedIcon
-                }}
+                icon={<div style={{ ...item.icon }} />}
+                selectedIcon={<div style={{ ...item.selectedIcon }} />}
                 title={item.title}
                 key={index}
                 selected={item.selected === item.title}
                 badge={item.badge}
                 onPress={item.onPress}
               >
-                {item.render()}
+                {item.render && item.render()}
               </TabBar.Item>
             );
           })}

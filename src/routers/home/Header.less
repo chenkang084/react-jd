@@ -1,0 +1,67 @@
+.headerContainer {
+  background: #efefef url("../../public/assets/imgs/header/header-bg.png")
+    repeat-x 0 0;
+  height: 0.8rem;
+  background-size: 100% 0.8rem;
+  padding-top: 10px;
+
+  .searchBox {
+    margin: 0 20px;
+    height: 100%;
+    position: relative;
+
+  }
+  .searchIcon {
+    display: inline-block;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    left: 10px;
+    line-height: 80px;
+    margin-top: 8px;
+  }
+  .spriteIconCancel {
+    background: url(../../public/assets/imgs/commons/cancel.png) no-repeat;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-position: 0 0;
+    background-size: 32px 32px;
+  }
+  .spriteIconSearch {
+    background: url(../../public/assets/imgs/commons/search-btn.png) no-repeat;
+    display: inline-block;
+    width: 0.32rem;
+    height: 0.32rem;
+    background-position: 0 0;
+    background-size: 32px 32px;
+  }
+
+  .searchInputBox {
+    margin-left: 60px;
+    padding-right: 60px;
+    border: 1px solid #bfbfbf;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 24px;
+    height: 60px;
+    background: #fff;
+    input {
+      width: 100%;
+      border: 0;
+      transform: translate(2%,50%);
+    }
+  }
+
+  .searchSubmitBtn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 0.6rem;
+    border: 0.01rem solid #bfbfbf;
+    width: 60px;
+    text-align: center;
+    line-height: 0.8rem;
+    border-radius: 4px;
+  }
+}

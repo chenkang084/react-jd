@@ -7,6 +7,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin"),
   env = _.trim(process.env.NODE_ENV),
   CleanWebpackPlugin = require("clean-webpack-plugin"),
   path = require("path"),
+  CopyWebpackPlugin = require("copy-webpack-plugin"),
   rootPath = path.resolve(__dirname, "../");
 
 const svgDirs = [
@@ -23,9 +24,9 @@ module.exports = {
   },
   output: {
     path: rootPath + "/dist", //打包后的文件存放的地方
-    filename: "[name].[chunkhash:8].bundle.js" //打包后输出文件的文件名
-    // publicPath:rootPath+'/public',
-    // chunkFilename: "[name]-[id].[chunkhash:8].bundle.js"
+    filename: "[name].[chunkhash:8].bundle.js", //打包后输出文件的文件名
+    // publicPath: "./public",
+    chunkFilename: "[name]-[id].[chunkhash:8].bundle.js"
   },
   module: {
     rules: [
@@ -44,14 +45,38 @@ module.exports = {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
-          use: ["css-loader", "postcss-loader"]
+          use: [
+            {
+              loader: "css-loader"
+            },
+            "postcss-loader"
+          ]
         })
       },
       {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
-          use: ["css-loader", "postcss-loader", "sass-loader"]
+          use: [
+            {
+              loader:
+                "css-loader?modules&sourceMap&importLoaders=1&localIdentName=[hash:base64:5]!postcss-loader"
+            },
+            "sass-loader"
+          ]
+        })
+      },
+      {
+        test: /\.less$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: [
+            {
+              loader:
+                "css-loader?modules&sourceMap&importLoaders=1&localIdentName=[hash:base64:5]!postcss-loader"
+            },
+            "less-loader"
+          ]
         })
       },
       {
@@ -77,8 +102,15 @@ module.exports = {
     }
   },
   plugins: [
-    new ExtractTextPlugin("main.css"),
-    // new webpack.optimize.ModuleConcatenationPlugin(),
+    new ExtractTextPlugin({
+      filename: "main.css",
+      disable: false,
+      allChunks: true
+    }),
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "common" // Specify the common bundle's name.
+    }),
     new webpack.LoaderOptionsPlugin({
       options: {
         postcss: function() {
@@ -105,10 +137,16 @@ module.exports = {
         rootPath,
         "./src/public/library/vendor-manifest.json"
       ))
-    })
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: rootPath + "/src/public/",
+        to: rootPath + "/dist"
+      }
+    ])
   ],
   resolve: {
     modules: ["node_modules", path.join(rootPath, "./node_modules")],
-    extensions: [".web.js", ".js", ".json"]
+    extensions: [".web.js", ".js", ".json", ".scss", ".css", ".less"]
   }
 };
