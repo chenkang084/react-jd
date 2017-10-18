@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import styles from "./Header.less";
+import styles from "./SearchBar.less";
 import classnames from "classnames";
 
-export default class Header extends React.Component {
+export default class GreySearchBar extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -11,7 +11,7 @@ export default class Header extends React.Component {
   render() {
     return (
       <div>
-        <div className={styles.headerContainer}>
+        <div className={styles.greySearchContainer}>
           <div className={styles.searchBox}>
             <div className={styles.searchIcon}>
               <span>
