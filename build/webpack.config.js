@@ -60,7 +60,7 @@ module.exports = {
           use: [
             {
               loader:
-                "css-loader?modules&sourceMap&importLoaders=1&localIdentName=[hash:base64:5]!postcss-loader"
+                "css-loader?sourceMap&importLoaders=1&localIdentName=[hash:base64:5]!postcss-loader"
             },
             "sass-loader"
           ]
