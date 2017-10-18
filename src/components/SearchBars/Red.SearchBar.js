@@ -25,7 +25,7 @@ export default class RedSearchBar extends React.Component {
                 <span className={styles.searchIcon}>
                   <i />
                 </span>
-                <input placeholder="搜索1" maxLength="20" />
+                <input placeholder="搜索" maxLength="20" />
                 <a className={styles.searchSubmitBtn} href="#">
                   登陆
                 </a>

@@ -2,9 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { SearchBar, Icon } from "antd-mobile";
 import { connect } from "dva";
-import GreySearchBar from "../../components/SearchBars/Grey.SearchBar";
-import RedSearchBar from "../../components/SearchBars/Red.SearchBar";
-import JdCarousel from "../../components/Carousel/Carousel";
+import {
+  Menus,
+  GreySearchBar,
+  RedSearchBar,
+  JdCarousel
+} from "../../components";
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
@@ -49,11 +52,7 @@ class HomePage extends React.Component {
           <RedSearchBar />
           <JdCarousel />
 
-          <div
-            style={{ height: "500px", background: "green", marginTop: "20px" }}
-          >
-            menus
-          </div>
+          <Menus/>
           <div
             style={{ height: "500px", background: "green", marginTop: "20px" }}
           >
