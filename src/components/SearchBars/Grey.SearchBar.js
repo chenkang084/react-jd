@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import styles from "./Header.less";
+import styles from "./SearchBar.less";
 import classnames from "classnames";
 
-export default class Header extends React.Component {
+export default class GreySearchBar extends React.Component {
   constructor(props) {
     super(props);
   }

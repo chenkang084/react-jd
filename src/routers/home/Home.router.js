@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { SearchBar, Icon } from "antd-mobile";
 import { connect } from "dva";
-import Header from "./Header";
+import GreySearchBar from "../../components/SearchBars/Grey.SearchBar";
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
@@ -12,7 +12,7 @@ class HomePage extends React.Component {
     return (
       <div>
         <div>
-          <Header />
+          <GreySearchBar />
         </div>
       </div>
     );
