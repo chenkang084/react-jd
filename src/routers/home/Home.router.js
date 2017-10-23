@@ -6,7 +6,8 @@ import {
   Menus,
   GreySearchBar,
   RedSearchBar,
-  JdCarousel
+  JdCarousel,
+  NewsReport
 } from "../../components";
 class HomePage extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class HomePage extends React.Component {
     const scrollY = window.scrollY,
       searchBarObj = document.getElementById("redSearchContainer");
 
-    console.log(scrollY);
+    // console.log(scrollY);
     if (scrollY > 100) {
       searchBarObj.style.background = "red";
       searchBarObj.style.opacity = "0.1";
@@ -52,7 +53,8 @@ class HomePage extends React.Component {
           <RedSearchBar />
           <JdCarousel />
 
-          <Menus/>
+          <Menus />
+          <NewsReport />
           <div
             style={{ height: "500px", background: "green", marginTop: "20px" }}
           >
