@@ -1,6 +1,6 @@
 import React from "react";
 import { Router, Route, IndexRoute } from "dva/router";
-import Test from "../components/test";
+// import Test from "../components/test";
 import App from "../components/App/App";
 const cached = {};
 function registerModel(app, model) {
@@ -52,7 +52,7 @@ function RouterConfig({ history, app }) {
           getComponent(nextState, cb) {
             Promise.all([
               System.import("../models/app2.model"),
-              System.import("../components/test")
+              // System.import("../components/test")
               // .then(loadRoute(cb))
               // .catch(errorLoading)
             ]).then(data => {
