@@ -8,7 +8,8 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin"),
   CleanWebpackPlugin = require("clean-webpack-plugin"),
   path = require("path"),
   CopyWebpackPlugin = require("copy-webpack-plugin"),
-  rootPath = path.resolve(__dirname, "../");
+  rootPath = path.resolve(__dirname, "../"),
+  theme = require("../theme.config.js")();
 
 const svgDirs = [
   require.resolve("antd-mobile").replace(/warn\.js$/, ""), // 1. 属于 antd-mobile 内置 svg 文件
@@ -68,6 +69,7 @@ module.exports = {
       },
       {
         test: /\.less$/,
+        include: [path.resolve(rootPath, "./src/components/")],
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
           use: [
@@ -76,6 +78,20 @@ module.exports = {
                 "css-loader?modules&sourceMap&importLoaders=1&localIdentName=[hash:base64:5]!postcss-loader"
             },
             "less-loader"
+          ]
+        })
+      },
+      {
+        test: /\.less$/,
+        include: [path.resolve(rootPath, "./src/styles/")],
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: [
+            {
+              loader:
+                "css-loader?sourceMap&importLoaders=1&localIdentName=[hash:base64:5]!postcss-loader"
+            },
+            `less-loader`
           ]
         })
       },

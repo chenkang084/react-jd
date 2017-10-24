@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import "./styles/test.less";
 import "./styles/global-common.css";
 import dva from "dva";
 import { browserHistory } from "dva/router";
-
 
 const app = dva({
   history: browserHistory,
