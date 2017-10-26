@@ -93,12 +93,12 @@ module.exports = {
             `less-loader`
           ]
         })
-      },
-      {
-        test: /\.(svg)$/i,
-        use: "svg-sprite-loader",
-        include: svgDirs // 把 svgDirs 路径下的所有 svg 文件交给 svg-sprite-loader 插件处理
       }
+      // {
+      //   test: /\.(svg)$/i,
+      //   use: "svg-sprite-loader",
+      //   include: svgDirs // 把 svgDirs 路径下的所有 svg 文件交给 svg-sprite-loader 插件处理
+      // }
     ]
   },
   devServer: {

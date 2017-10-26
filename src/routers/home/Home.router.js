@@ -10,10 +10,11 @@ import {
   NewsReport,
   Gallery
 } from "../../components";
+import lazyLoadImgs from "../../utils/lazyLoadImgs";
+
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
-    this.imgLoadIndex = 0;
   }
 
   componentDidMount() {
@@ -47,24 +48,8 @@ class HomePage extends React.Component {
       searchBarObj.style.opacity = "1";
     }
 
-    const asyncImgs = document.getElementsByClassName("aysncMaskImg");
 
-    const filters = [...asyncImgs].filter(img => {
-      return !img.src;
-    });
-    var seeHeight = document.documentElement.clientHeight; //可见区域高度
-    var scrollTop =
-      document.documentElement.scrollTop || document.body.scrollTop; //滚动条距离顶部高度
-
-    for (let i = 0; i < filters.length; i++) {
-      console.log(filters[i].offsetTop);
-
-      if (filters[i].offsetTop < seeHeight + scrollTop) {
-        const path = filters[i].dataset.path;
-        filters[i].src = path;
-        // this.imgLoadIndex++;
-      }
-    }
+    lazyLoadImgs();
   }
 
   render() {
