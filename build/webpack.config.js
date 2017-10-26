@@ -8,8 +8,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin"),
   CleanWebpackPlugin = require("clean-webpack-plugin"),
   path = require("path"),
   CopyWebpackPlugin = require("copy-webpack-plugin"),
-  rootPath = path.resolve(__dirname, "../"),
-  theme = require("../theme.config.js")();
+  rootPath = path.resolve(__dirname, "../");
 
 const svgDirs = [
   require.resolve("antd-mobile").replace(/warn\.js$/, ""), // 1. 属于 antd-mobile 内置 svg 文件
