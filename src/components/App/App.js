@@ -2,6 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { NavTabs } from "../NavTabs/NavTabs";
 import { connect } from "dva";
+import {
+  Menus,
+  GreySearchBar,
+  RedSearchBar,
+  JdCarousel,
+  NewsReport,
+  Gallery
+} from "../../components";
 
 class App extends React.Component {
   constructor(props) {
@@ -38,10 +46,19 @@ class App extends React.Component {
         // badge: 1,
         onPress: () => {
           this.handlePress("首页");
+        },
+        render: () => {
+          return (
+            <div>
+              <RedSearchBar />
+              <JdCarousel />
+
+              <Menus />
+              <NewsReport />
+              <Gallery />
+            </div>
+          );
         }
-        // render: () => {
-        //   return "首页";
-        // }
       },
       {
         title: "分类",
@@ -61,10 +78,10 @@ class App extends React.Component {
         badge: 0,
         onPress: () => {
           this.handlePress("分类");
+        },
+        render: () => {
+          return "口碑";
         }
-        // render: () => {
-        //   return "口碑";
-        // }
       },
       {
         title: "发现",
@@ -84,10 +101,10 @@ class App extends React.Component {
         badge: 1,
         onPress: () => {
           this.handlePress("发现");
+        },
+        render: () => {
+          return "朋友";
         }
-        // render: () => {
-        //   return "朋友";
-        // }
       },
       {
         title: "购物",
@@ -107,10 +124,10 @@ class App extends React.Component {
         badge: 1,
         onPress: () => {
           this.handlePress("购物");
+        },
+        render: () => {
+          return "我的";
         }
-        // render: () => {
-        //   return "我的";
-        // }
       },
       {
         title: "我的",
@@ -130,10 +147,10 @@ class App extends React.Component {
         badge: 1,
         onPress: () => {
           this.handlePress("我的");
+        },
+        render: () => {
+          return "我的";
         }
-        // render: () => {
-        //   return "我的";
-        // }
       }
     ];
 

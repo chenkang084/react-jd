@@ -30,21 +30,17 @@ function RouterConfig({ history, app }) {
             .catch(errorLoading)
         ]);
       },
-      indexRoute: {
-        getComponent(nextState, cb) {
-          Promise.all([
-            System.import("../models/app2.model"),
-            System.import("../routers/home/Home.router.js")
-            // .then(loadRoute(cb))
-            // .catch(errorLoading)
-          ]).then(data => {
-            app.model(data[0].default || data[0]);
-
-            // loadRoute(cb);
-            cb(null, data[1].default || data[1]);
-          });
-        }
-      },
+      // indexRoute: {
+      //   getComponent(nextState, cb) {
+      //     Promise.all([
+      //       System.import("../models/app2.model"),
+      //       System.import("../routers/home/Home.router.js")
+      //     ]).then(data => {
+      //       app.model(data[0].default || data[0]);
+      //       cb(null, data[1].default || data[1]);
+      //     });
+      //   }
+      // },
       childRoutes: [
         {
           path: "/test",
