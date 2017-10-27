@@ -10,22 +10,20 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin"),
   CopyWebpackPlugin = require("copy-webpack-plugin"),
   rootPath = path.resolve(__dirname, "../");
 
-const svgDirs = [
-  require.resolve("antd-mobile").replace(/warn\.js$/, ""), // 1. 属于 antd-mobile 内置 svg 文件
-  path.resolve(rootPath, "/src/images") // 2. 自己私人的 svg 存放目录
-];
+// const svgDirs = [
+//   require.resolve("antd-mobile").replace(/warn\.js$/, ""), // 1. 属于 antd-mobile 内置 svg 文件
+//   path.resolve(rootPath, "/src/images") // 2. 自己私人的 svg 存放目录
+// ];
 
 module.exports = {
   devtool: "module-source-map",
   entry: {
-    app: [
-      rootPath + "/src/index.js" //唯一入口文件
-    ]
+    app: [rootPath + "/src/index.js"]
   },
   output: {
-    path: rootPath + "/dist", //打包后的文件存放的地方
-    filename: "[name].[chunkhash:8].bundle.js", //打包后输出文件的文件名
-    // publicPath: "./public",
+    path: rootPath + "/dist",
+    filename: "[name].[chunkhash:8].bundle.js",
+    // publicPath: "./public", // 打包时，是否添加前缀
     chunkFilename: "[name]-[id].[chunkhash:8].bundle.js"
   },
   module: {
