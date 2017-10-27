@@ -3,6 +3,9 @@ html {
   font-family: PingFang SC, Helvetica Neue, Hiragino Sans GB, Helvetica,
     Microsoft YaHei, Arial;
   background: #f5f5f5;
+  margin: 0;
+  /* height: 150px !important;
+  overflow-y: scroll; */
 }
 
 .clearfix:after {
@@ -12,3 +15,9 @@ html {
   visibility: hidden;
   height: 0;
 }
+/* 
+.am-tabs-tab-bar-wrap {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+} */

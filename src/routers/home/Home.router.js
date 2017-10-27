@@ -6,8 +6,12 @@ import {
   Menus,
   GreySearchBar,
   RedSearchBar,
-  JdCarousel
+  JdCarousel,
+  NewsReport,
+  Gallery
 } from "../../components";
+import lazyLoadImgs from "../../utils/lazyLoadImgs";
+
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +27,7 @@ class HomePage extends React.Component {
     const scrollY = window.scrollY,
       searchBarObj = document.getElementById("redSearchContainer");
 
-    console.log(scrollY);
+    // console.log(scrollY);
     if (scrollY > 100) {
       searchBarObj.style.background = "red";
       searchBarObj.style.opacity = "0.1";
@@ -43,6 +47,9 @@ class HomePage extends React.Component {
       searchBarObj.style.background = "transparent";
       searchBarObj.style.opacity = "1";
     }
+
+
+    lazyLoadImgs();
   }
 
   render() {
@@ -52,7 +59,10 @@ class HomePage extends React.Component {
           <RedSearchBar />
           <JdCarousel />
 
-          <Menus/>
+          <Menus />
+          <NewsReport />
+
+          <Gallery />
           <div
             style={{ height: "500px", background: "green", marginTop: "20px" }}
           >

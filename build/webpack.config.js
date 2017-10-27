@@ -68,6 +68,7 @@ module.exports = {
       },
       {
         test: /\.less$/,
+        include: [path.resolve(rootPath, "./src/components/")],
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
           use: [
@@ -80,10 +81,24 @@ module.exports = {
         })
       },
       {
-        test: /\.(svg)$/i,
-        use: "svg-sprite-loader",
-        include: svgDirs // 把 svgDirs 路径下的所有 svg 文件交给 svg-sprite-loader 插件处理
+        test: /\.less$/,
+        include: [path.resolve(rootPath, "./src/styles/")],
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: [
+            {
+              loader:
+                "css-loader?sourceMap&importLoaders=1&localIdentName=[hash:base64:5]!postcss-loader"
+            },
+            `less-loader`
+          ]
+        })
       }
+      // {
+      //   test: /\.(svg)$/i,
+      //   use: "svg-sprite-loader",
+      //   include: svgDirs // 把 svgDirs 路径下的所有 svg 文件交给 svg-sprite-loader 插件处理
+      // }
     ]
   },
   devServer: {

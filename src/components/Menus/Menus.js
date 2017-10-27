@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import styles from "./Menus.less";
-import classnames from "classnames";
 
 export default class Menus extends React.Component {
   constructor(props) {

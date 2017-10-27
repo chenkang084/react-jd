@@ -1,11 +1,12 @@
 {
-  "presets": ["es2015","stage-1", "react"],
+  "presets": ["es2015", "stage-0", "react"],
   "plugins": [
+    "transform-runtime",
     [
       "import",
       {
-        "libraryName": "antd-mobile",
-        "style": "css"
+        "libraryName": "antd-mobile"
+        // "style": "css"
       }
     ]
   ]
