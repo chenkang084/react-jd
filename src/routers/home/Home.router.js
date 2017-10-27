@@ -48,6 +48,7 @@ class HomePage extends React.Component {
       searchBarObj.style.opacity = "1";
     }
 
+
     lazyLoadImgs();
   }
 
@@ -55,7 +56,13 @@ class HomePage extends React.Component {
     return (
       <div>
         <div>
-          
+          <RedSearchBar />
+          <JdCarousel />
+
+          <Menus />
+          <NewsReport />
+
+          <Gallery />
           <div
             style={{ height: "500px", background: "green", marginTop: "20px" }}
           >

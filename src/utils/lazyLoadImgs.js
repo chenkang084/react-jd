@@ -5,8 +5,8 @@ export default () => {
     return img.dataset.load === "false";
   });
   const seeHeight = document.documentElement.clientHeight; //可见区域高度
-  const scrollTop =
-    document.documentElement.scrollTop || document.body.scrollTop; //滚动条距离顶部高度
+  const scrollTop = document.getElementsByClassName("am-tabs-pane-wrap")[0]
+    .scrollTop; //滚动条距离顶部高度
 
   for (let i = 0; i < filters.length; i++) {
     if (filters[i].offsetTop < seeHeight + scrollTop) {

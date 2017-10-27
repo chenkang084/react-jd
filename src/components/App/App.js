@@ -10,7 +10,7 @@ import {
   NewsReport,
   Gallery
 } from "../../components";
-
+import lazyLoadImgs from "../../utils/lazyLoadImgs";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -18,6 +18,45 @@ class App extends React.Component {
       selectedTab: "首页",
       hidden: false
     };
+  }
+
+  componentDidMount() {
+    document
+      .getElementsByClassName("am-tabs-pane-wrap")[0]
+      .addEventListener("scroll", this.handleScroll.bind(this));
+  }
+  componentWillUnmount() {
+    document
+      .getElementsByClassName("am-tabs-pane-wrap")[0]
+      .removeEventListener("scroll", this.handleScroll.bind(this));
+  }
+  handleScroll(e) {
+    const scrollY = document.getElementsByClassName("am-tabs-pane-wrap")[0]
+        .scrollTop,
+      searchBarObj = document.getElementById("redSearchContainer");
+
+    console.log(scrollY);
+    if (scrollY > 100) {
+      searchBarObj.style.background = "red";
+      searchBarObj.style.opacity = "0.1";
+    }
+
+    if (scrollY > 200) {
+      searchBarObj.style.background = "#de181b";
+      searchBarObj.style.opacity = "0.5";
+    }
+
+    if (scrollY > 300) {
+      searchBarObj.style.background = "#de181b";
+      searchBarObj.style.opacity = "1";
+    }
+
+    if (scrollY === 0) {
+      searchBarObj.style.background = "transparent";
+      searchBarObj.style.opacity = "1";
+    }
+
+    lazyLoadImgs();
   }
 
   handlePress(key) {
@@ -52,7 +91,6 @@ class App extends React.Component {
             <div>
               <RedSearchBar />
               <JdCarousel />
-
               <Menus />
               <NewsReport />
               <Gallery />

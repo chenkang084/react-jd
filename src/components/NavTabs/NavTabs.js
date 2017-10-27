@@ -10,7 +10,10 @@ export class NavTabs extends React.Component {
 
   render() {
     return (
-      <div style={{ position: "fixed", height: "100%", width: "100%", top: 0 }}>
+      <div
+        id="app-home"
+        style={{ position: "fixed", height: "100%", width: "100%", top: 0 }}
+      >
         <TabBar
           unselectedTintColor="#181818"
           tintColor="#f13030"
