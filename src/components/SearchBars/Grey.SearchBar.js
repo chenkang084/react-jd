@@ -8,12 +8,18 @@ export default class GreySearchBar extends React.Component {
     super(props);
   }
 
+  handleCannel = () => {
+    if (this.props.searchRecommend) {
+      this.props.handleSearchDisplay(false);
+    }
+  };
+
   render() {
     return (
       <div>
-        <div className={styles.greySearchContainer}>
+        <div style={{ display: !this.props.searchRecommend ? "none" : "block" }} className={styles.greySearchContainer}>
           <div className={styles.searchBox}>
-            <div className={styles.searchIcon}>
+            <div onClick={this.handleCannel} className={styles.searchIcon}>
               <span>
                 <i className={classnames(styles.spriteIconCancel)} />
               </span>

@@ -7,19 +7,20 @@ export default class RedSearchBar extends React.Component {
     super(props);
   }
 
-  handleScroll(e) {
+  handleScroll = e => {
     console.log(e);
-  }
+
+    if (!this.props.searchRecommend) {
+      this.props.handleSearchDisplay(true);
+    }
+  };
 
   render() {
     return (
       <div>
-        <div
-          id="redSearchContainer"
-          className={styles.redSearchContainer}
-        >
+        <div id="redSearchContainer" className={styles.redSearchContainer}>
           <div className={styles.searchBox}>
-            <form>
+            <form onClick={this.handleScroll}>
               <div className={styles.searchInputBox}>
                 <span className={styles.searchIcon}>
                   <i />

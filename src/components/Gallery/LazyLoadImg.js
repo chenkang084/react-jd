@@ -35,8 +35,6 @@ export default class LazyLoadImg extends React.Component {
 
         if (ele.offsetTop < seeHeight + scrollTop && !ele.src) {
           ele.src = this.props.src;
-        //   ele.dataset.load = "true";
-        //   ele.style.background = `url(${ele.dataset.path})`;
         }
       }, 2000);
     }

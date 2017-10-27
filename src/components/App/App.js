@@ -2,21 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { NavTabs } from "../NavTabs/NavTabs";
 import { connect } from "dva";
-import {
-  Menus,
-  GreySearchBar,
-  RedSearchBar,
-  JdCarousel,
-  NewsReport,
-  Gallery
-} from "../../components";
-import lazyLoadImgs from "../../utils/lazyLoadImgs";
+import HomePage from "./HomePage";
+
+import lazyLoadImgs from "../../utils/lazyLoad";
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedTab: "首页",
-      hidden: false
+      hidden: false,
+      searchRecommend: false
     };
   }
 
@@ -36,17 +32,17 @@ class App extends React.Component {
       searchBarObj = document.getElementById("redSearchContainer");
 
     console.log(scrollY);
-    if (scrollY > 100) {
+    if (scrollY > 200) {
       searchBarObj.style.background = "red";
       searchBarObj.style.opacity = "0.1";
     }
 
-    if (scrollY > 200) {
+    if (scrollY > 400) {
       searchBarObj.style.background = "#de181b";
       searchBarObj.style.opacity = "0.5";
     }
 
-    if (scrollY > 300) {
+    if (scrollY > 600) {
       searchBarObj.style.background = "#de181b";
       searchBarObj.style.opacity = "1";
     }
@@ -65,39 +61,16 @@ class App extends React.Component {
     });
   }
 
+  handleSearchDisplay = status => {
+    this.setState({
+      searchRecommend: status,
+      hidden: status
+    });
+  };
+
   render() {
     const menus = [
-      {
-        title: "首页",
-        icon: {
-          width: "0.44rem",
-          height: "0.44rem",
-          background:
-            "url(./assets/imgs/navs/a-home-unselect.png) center /  .44rem no-repeat"
-        },
-        selectedIcon: {
-          width: "0.44rem",
-          height: "0.44rem",
-          background:
-            "url(./assets/imgs/navs/a-home.png) center /  .44rem no-repeat"
-        },
-        selected: this.state.selectedTab,
-        // badge: 1,
-        onPress: () => {
-          this.handlePress("首页");
-        },
-        render: () => {
-          return (
-            <div>
-              <RedSearchBar />
-              <JdCarousel />
-              <Menus />
-              <NewsReport />
-              <Gallery />
-            </div>
-          );
-        }
-      },
+      HomePage.call(this),
       {
         title: "分类",
         icon: {
@@ -194,7 +167,7 @@ class App extends React.Component {
 
     return (
       <div>
-        <NavTabs menus={menus} />
+        <NavTabs menus={menus} hidden={this.state.hidden} />
         <div>{this.props.children}</div>
       </div>
     );

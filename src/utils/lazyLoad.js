@@ -14,7 +14,9 @@ export default () => {
         filters[i].dataset.load = "true";
         setTimeout(() => {
           const path = filters[i].dataset.path;
-          filters[i].style.background = `url(${path})`;
+          filters[i].style["background-image"] = `url(${path})`;
+          filters[i].style["background-size"] = `100% 100%`;
+          filters[i].style["background-repeat"] = `no-repeat`;
 
           console.log(filters[i], "set src");
         }, 2000);
