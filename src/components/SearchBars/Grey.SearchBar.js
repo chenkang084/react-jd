@@ -17,7 +17,10 @@ export default class GreySearchBar extends React.Component {
   render() {
     return (
       <div>
-        <div style={{ display: !this.props.searchRecommend ? "none" : "block" }} className={styles.greySearchContainer}>
+        <div
+          style={{ display: !this.props.searchRecommend ? "none" : "block" }}
+          className={styles.greySearchContainer}
+        >
           <div className={styles.searchBox}>
             <div onClick={this.handleCannel} className={styles.searchIcon}>
               <span>
@@ -32,6 +35,19 @@ export default class GreySearchBar extends React.Component {
                 </a>
               </div>
             </form>
+          </div>
+
+          <div className={styles.hotSearchContainer}>
+            <p className={styles.title}>热门搜索：</p>
+            <div>
+              <a className={styles.hotText}>
+                <i>11.11预热</i>
+              </a>
+
+              <a className={styles.hotText}>
+                <i>家装</i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
