@@ -10,6 +10,8 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin"),
   CopyWebpackPlugin = require("copy-webpack-plugin"),
   rootPath = path.resolve(__dirname, "../");
 
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+
 // const svgDirs = [
 //   require.resolve("antd-mobile").replace(/warn\.js$/, ""), // 1. 属于 antd-mobile 内置 svg 文件
 //   path.resolve(rootPath, "/src/images") // 2. 自己私人的 svg 存放目录
@@ -45,7 +47,8 @@ module.exports = {
           fallback: "style-loader",
           use: [
             {
-              loader: "css-loader"
+              loader: "css-loader",
+              options: { minimize: true, sourceMap: false }
             },
             "postcss-loader"
           ]
@@ -57,9 +60,15 @@ module.exports = {
           fallback: "style-loader",
           use: [
             {
-              loader:
-                "css-loader?sourceMap&importLoaders=1&localIdentName=[hash:base64:5]!postcss-loader"
+              loader: "css-loader",
+              options: {
+                sourceMap: false,
+                minimize: true,
+                importLoader: 1,
+                localIdentName: "[hash:base64:5]"
+              }
             },
+            "postcss-loader",
             "sass-loader"
           ]
         })
@@ -71,9 +80,17 @@ module.exports = {
           fallback: "style-loader",
           use: [
             {
-              loader:
-                "css-loader?modules&sourceMap&importLoaders=1&localIdentName=[hash:base64:5]!postcss-loader"
+              loader: "css-loader",
+              options: {
+                modules: true,
+                sourceMap: false,
+                // minimize: true,
+                importLoader: 1,
+                localIdentName: "[hash:base64:5]"
+              }
+              // ?modules&sourceMap&importLoaders=1&localIdentName=[hash:base64:5]!postcss-loader"
             },
+            "postcss-loader",
             "less-loader"
           ]
         })
@@ -85,9 +102,17 @@ module.exports = {
           fallback: "style-loader",
           use: [
             {
-              loader:
-                "css-loader?sourceMap&importLoaders=1&localIdentName=[hash:base64:5]!postcss-loader"
+              loader: "css-loader",
+              options: {
+                modules: true,
+                sourceMap: false,
+                // minimize: true,
+                importLoader: 1,
+                localIdentName: "[hash:base64:5]"
+              }
+              // ?sourceMap&importLoaders=1&localIdentName=[hash:base64:5]!postcss-loader
             },
+            "postcss-loader",
             `less-loader`
           ]
         })
@@ -156,7 +181,13 @@ module.exports = {
         from: rootPath + "/src/public/",
         to: rootPath + "/dist"
       }
-    ])
+    ]),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("production")
+      }
+    }),
+    new UglifyJsPlugin()
   ],
   resolve: {
     modules: ["node_modules", path.join(rootPath, "./node_modules")],
