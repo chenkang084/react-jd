@@ -7,6 +7,8 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin"),
   path = require("path"),
   rootPath = path.resolve(__dirname, "../");
 
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+
 const svgDirs = [
   require.resolve("antd-mobile").replace(/warn\.js$/, ""), // 1. 属于 antd-mobile 内置 svg 文件
   path.resolve(rootPath, "./src/images") // 2. 自己私人的 svg 存放目录
@@ -56,11 +58,12 @@ module.exports = {
 
   plugins: [
     new ExtractTextPlugin("main.css"),
-    new CleanWebpackPlugin([rootPath + "/src/library/*"]),
+    new CleanWebpackPlugin([rootPath + "/src/public/library/*"]),
     new webpack.DllPlugin({
-      path: path.resolve(rootPath, "./src/library/[name]-manifest.json"),
+      path: path.resolve(rootPath, "./src/public/library/[name]-manifest.json"),
       name: "[name]"
-    })
+    }),
+    new UglifyJsPlugin()
   ],
   resolve: {
     modules: ["node_modules", path.join(rootPath, "./node_modules")],
